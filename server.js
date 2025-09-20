@@ -1,6 +1,6 @@
 console.log("Server starting...");
 const express = require('express');
-const tf = require('@tensorflow/tfjs-node'); // for decodeImage
+const tf = require('@tensorflow/tfjs');
 const tflite = require('@tensorflow/tfjs-tflite');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 
-// Load breed labels
+// Load breed labels from file
 let labels = [];
 function loadLabels() {
   try {
@@ -40,10 +40,10 @@ async function loadModel() {
   }
 }
 
-// Predict
+// Predict function
 async function predict(imageBuffer) {
   const input = tf.node
-    .decodeImage(imageBuffer, 3) // RGB
+    .decodeImage(imageBuffer, 3) // decode into RGB
     .resizeNearestNeighbor([224, 224])
     .expandDims(0)
     .toFloat()
@@ -59,7 +59,7 @@ async function predict(imageBuffer) {
   };
 }
 
-// Preprocess
+// Image preprocessing
 async function processImage(imageBuffer) {
   return await sharp(imageBuffer)
     .resize(224, 224)
@@ -67,7 +67,7 @@ async function processImage(imageBuffer) {
     .toBuffer();
 }
 
-// POST /api/classify
+// Classification endpoint
 app.post('/api/classify', async (req, res) => {
   try {
     console.log('📸 Received classification request');
@@ -102,7 +102,7 @@ app.post('/api/classify', async (req, res) => {
   }
 });
 
-// GET /api/health
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'Server is running! 🚀',
@@ -112,7 +112,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Root
+// Root endpoint
 app.get('/', (req, res) => {
   res.send(`
     <h1>🐄 Cow Classifier Backend</h1>
