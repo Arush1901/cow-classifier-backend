@@ -1,0 +1,28 @@
+{
+  "name": "cow-classifier-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arush1901/cow-classifier-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Arush1901/cow-classifier-backend/issues"
+  },
+  "homepage": "https://github.com/Arush1901/cow-classifier-backend#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "sharp": "^0.34.4"
+  }
+}
