@@ -1,6 +1,5 @@
 console.log("Server starting...");
 const express = require('express');
-const tf = require('@tensorflow/tfjs');
 const tf = require('@tensorflow/tfjs-node');
 const cors = require('cors');
 const bodyParser = require('body-parser');
