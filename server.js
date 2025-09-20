@@ -1,7 +1,7 @@
 console.log("Server starting...");
 const express = require('express');
 const tf = require('@tensorflow/tfjs');
-const tflite = require('@tensorflow/tfjs-tflite');
+const tf = require('@tensorflow/tfjs-node');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const sharp = require('sharp');
@@ -33,7 +33,7 @@ function loadLabels() {
 let model;
 async function loadModel() {
   try {
-    model = await tflite.loadTFLiteModel('file://model.tflite');
+    model = await tf.loadGraphModel('file://model.tflite');
     console.log("✅ TFLite model loaded!");
   } catch (err) {
     console.error("❌ Failed to load TFLite model:", err.message);
